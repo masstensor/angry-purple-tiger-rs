@@ -31,23 +31,26 @@ impl PartialEq<&str> for AnimalName {
     }
 }
 
+fn str_to_animal_name(s: &str) -> AnimalName {
+    let digest = hex_digest(s);
+    AnimalName {
+        adjective: words::ADJECTIVES[digest[0]],
+        color: words::COLORS[digest[1]],
+        animal: words::ANIMALS[digest[2]],
+    }
+}
+
 impl FromStr for AnimalName {
     type Err = std::convert::Infallible;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let digest = hex_digest(s);
-        Ok(Self {
-            adjective: words::ADJECTIVES[digest[0]],
-            color: words::COLORS[digest[1]],
-            animal: words::ANIMALS[digest[2]],
-        })
+        Ok(str_to_animal_name(s))
     }
 }
 
 #[cfg(feature = "crypto")]
 impl From<helium_crypto::PublicKey> for AnimalName {
     fn from(pubkey: helium_crypto::PublicKey) -> Self {
-        // we unwrap since we know it can't fail
-        AnimalName::from_str(&pubkey.to_string()).unwrap()
+        str_to_animal_name(&pubkey.to_string())
     }
 }
 
