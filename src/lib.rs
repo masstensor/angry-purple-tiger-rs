@@ -45,13 +45,7 @@ impl FromStr for AnimalName {
 #[cfg(feature = "crypto")]
 impl From<helium_crypto::PublicKey> for AnimalName {
     fn from(pubkey: helium_crypto::PublicKey) -> Self {
-        let s = pubkey.to_string();
-        let digest = hex_digest(&s);
-        Self {
-            adjective: words::ADJECTIVES[digest[0]],
-            color: words::COLORS[digest[1]],
-            animal: words::ANIMALS[digest[2]],
-        }
+        AnimalName::from_str(&pubkey.to_string())
     }
 }
 
