@@ -46,7 +46,8 @@ impl FromStr for AnimalName {
 #[cfg(feature = "crypto")]
 impl From<helium_crypto::PublicKey> for AnimalName {
     fn from(pubkey: helium_crypto::PublicKey) -> Self {
-        AnimalName::from_str(&pubkey.to_string())
+        // we unwrap since we know it can't fail
+        AnimalName::from_str(&pubkey.to_string()).unwrap()
     }
 }
 
