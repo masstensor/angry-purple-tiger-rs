@@ -8,7 +8,6 @@ description = "animal-based hash digests for humans"
 authors = ["Marc Nijdam <marc@helium.com>"]
 edition = "2018"
 
-
 [features]
 crypto = ["helium-crypto"]
 
@@ -19,6 +18,4 @@ path = "src/bin.rs"
 [dependencies]
 md5 = "0"
 clap = "2"
-helium-crypto = { git = "https://github.com/helium/helium-crypto-rs", branch = "main", optional = true }
-
-[dev-dependencies]
+helium-crypto = { git = "https://github.com/helium/helium-crypto-rs", tag = "v0.3.4", optional = true }
