@@ -42,6 +42,7 @@ impl FromStr for AnimalName {
         })
     }
 }
+
 #[cfg(feature = "crypto")]
 impl From<helium_crypto::PublicKey> for AnimalName {
     fn from(pubkey: helium_crypto::PublicKey) -> Self {
